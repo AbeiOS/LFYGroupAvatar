@@ -1,0 +1,1 @@
+../../../../../LFYGroupAvatarLib/AJColorTool.h

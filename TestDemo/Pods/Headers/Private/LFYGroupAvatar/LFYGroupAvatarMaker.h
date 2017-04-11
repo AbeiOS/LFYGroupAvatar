@@ -1,0 +1,1 @@
+../../../../../LFYGroupAvatarLib/LFYGroupAvatarMaker.h
