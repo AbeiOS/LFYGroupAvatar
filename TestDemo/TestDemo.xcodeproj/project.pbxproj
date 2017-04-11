@@ -18,6 +18,8 @@
 		9E5D3B901E9B8D4D003DBF83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D3B8E1E9B8D4D003DBF83 /* LaunchScreen.storyboard */; };
 		9E5D3B9B1E9B8D4D003DBF83 /* TestDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3B9A1E9B8D4D003DBF83 /* TestDemoTests.m */; };
 		9E5D3BA61E9B8D4D003DBF83 /* TestDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3BA51E9B8D4D003DBF83 /* TestDemoUITests.m */; };
+		9E5D3BC11E9CB76E003DBF83 /* AJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3BBD1E9CB76E003DBF83 /* AJColorTool.m */; };
+		9E5D3BC21E9CB76E003DBF83 /* LFYGroupAvatarMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3BC01E9CB76E003DBF83 /* LFYGroupAvatarMaker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,11 @@
 		9E5D3BA11E9B8D4D003DBF83 /* TestDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E5D3BA51E9B8D4D003DBF83 /* TestDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestDemoUITests.m; sourceTree = "<group>"; };
 		9E5D3BA71E9B8D4D003DBF83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E5D3BBC1E9CB76E003DBF83 /* AJColorTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJColorTool.h; sourceTree = "<group>"; };
+		9E5D3BBD1E9CB76E003DBF83 /* AJColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJColorTool.m; sourceTree = "<group>"; };
+		9E5D3BBE1E9CB76E003DBF83 /* LFYGroupAvatarDfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFYGroupAvatarDfs.h; sourceTree = "<group>"; };
+		9E5D3BBF1E9CB76E003DBF83 /* LFYGroupAvatarMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFYGroupAvatarMaker.h; sourceTree = "<group>"; };
+		9E5D3BC01E9CB76E003DBF83 /* LFYGroupAvatarMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFYGroupAvatarMaker.m; sourceTree = "<group>"; };
 		BA032A09E5C7868F687A5F80 /* libPods-TestDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB986C500CB89759E0513BE6 /* libPods-TestDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFF37E9D0F1BFA680C417D36 /* libPods-TestDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +125,7 @@
 		9E5D3B7F1E9B8D4D003DBF83 /* TestDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9E5D3BBB1E9CB76E003DBF83 /* LFYGroupAvatar */,
 				9E5D3B831E9B8D4D003DBF83 /* AppDelegate.h */,
 				9E5D3B841E9B8D4D003DBF83 /* AppDelegate.m */,
 				9E5D3B861E9B8D4D003DBF83 /* ViewController.h */,
@@ -155,6 +163,18 @@
 				9E5D3BA71E9B8D4D003DBF83 /* Info.plist */,
 			);
 			path = TestDemoUITests;
+			sourceTree = "<group>";
+		};
+		9E5D3BBB1E9CB76E003DBF83 /* LFYGroupAvatar */ = {
+			isa = PBXGroup;
+			children = (
+				9E5D3BBC1E9CB76E003DBF83 /* AJColorTool.h */,
+				9E5D3BBD1E9CB76E003DBF83 /* AJColorTool.m */,
+				9E5D3BBE1E9CB76E003DBF83 /* LFYGroupAvatarDfs.h */,
+				9E5D3BBF1E9CB76E003DBF83 /* LFYGroupAvatarMaker.h */,
+				9E5D3BC01E9CB76E003DBF83 /* LFYGroupAvatarMaker.m */,
+			);
+			path = LFYGroupAvatar;
 			sourceTree = "<group>";
 		};
 		A5EFBDFE5D6439706F1574A0 /* Frameworks */ = {
@@ -463,6 +483,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5D3BC21E9CB76E003DBF83 /* LFYGroupAvatarMaker.m in Sources */,
+				9E5D3BC11E9CB76E003DBF83 /* AJColorTool.m in Sources */,
 				9E5D3B881E9B8D4D003DBF83 /* ViewController.m in Sources */,
 				9E5D3B851E9B8D4D003DBF83 /* AppDelegate.m in Sources */,
 				9E5D3B821E9B8D4D003DBF83 /* main.m in Sources */,
@@ -707,6 +729,7 @@
 				9E5D3BAC1E9B8D4D003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E5D3BAD1E9B8D4D003DBF83 /* Build configuration list for PBXNativeTarget "TestDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -715,6 +738,7 @@
 				9E5D3BAF1E9B8D4D003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E5D3BB01E9B8D4D003DBF83 /* Build configuration list for PBXNativeTarget "TestDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -723,6 +747,7 @@
 				9E5D3BB21E9B8D4D003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
