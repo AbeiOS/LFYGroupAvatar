@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "LFYGroupAvatar"
   s.version      = "1.0.0"
-  s.summary      = "Just An Avatar"
+  s.summary      = "GroupAvatar"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,8 +25,8 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-		私有头像测试,就是仿照QQ微信群头像                 
-		DESC
+This is an avatar of a chat group which is similar to the one in QQ and WeChat.
+                   DESC
 
   s.homepage     = "https://github.com/AbeiOS/LFYGroupAvatar"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -53,10 +53,10 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "lufei" => "lufei@iyenei.com" }
-  # Or just: s.author    = "lufei"
-  # s.authors            = { "lufei" => "lufei@iyenei.com" }
-  # s.social_media_url   = "http://twitter.com/lufei"
+  s.author             = { "abei" => "2805508788@qq.com" }
+  # Or just: s.author    = "abei"
+  # s.authors            = { "abei" => "2805508788@qq.com" }
+  # s.social_media_url   = "http://twitter.com/abei"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -64,6 +64,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
+  # s.platform     = :ios
   s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
@@ -79,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/AbeiOS/LFYGroupAvatar.git", :tag => "{1.0.0}" }
+  s.source       = { :git => "https://github.com/AbeiOS/LFYGroupAvatar.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -116,8 +117,8 @@ Pod::Spec.new do |s|
   #  the lib prefix of their name.
   #
 
-  # s.framework  = "SomeFramework"
-  s.frameworks = "UIKit", "Foundation"
+  s.framework  = "UIKit"
+  # s.frameworks = "SomeFramework", "AnotherFramework"
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
