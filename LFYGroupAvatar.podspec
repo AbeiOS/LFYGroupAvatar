@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 		私有头像测试,就是仿照QQ微信群头像                 
 		DESC
 
-  s.homepage     = "http://www.baidu.com/LFYGroupAvatar"
+  s.homepage     = "https://github.com/AbeiOS/LFYGroupAvatar"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://www.baidu.com/LFYGroupAvatar.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/AbeiOS/LFYGroupAvatar.git", :tag => "{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
