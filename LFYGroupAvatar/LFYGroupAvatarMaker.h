@@ -11,27 +11,30 @@
 
 #import "LFYGroupAvatarDfs.h"
 
+
 @interface LFYGroupAvatarMaker : NSObject
 
 ///QQ
-///多边形中心点距离每个小头像的边的距离系数 默认值为 3.5 / 80 即头像大小为80的时候，距离为3.5;
+///多边形中心点距离每个小头像的边的距离系数\
+                                    默认值为 3.5 / 80 即头像大小为80的时候，距离为3.5;
 @property (nonatomic, assign) CGFloat distanceFactor;
-//当头像为QQ头像时候的背景色 默认值为[UIColor whiteColor]
+//当头像为QQ头像时候的背景色            默认值为[UIColor whiteColor]
 @property (nonatomic, strong) UIColor *avatarBackGroundColorQQ;
 
 ///WeChat
-///大头像的边框大小，默认值为1.0f
+///大头像的边框大小                    默认值为1.0f
 @property (nonatomic, assign) CGFloat leadingWeChat;
-///小头像的间距大，默认值为2.0f
+///小头像的间距大                      默认值为2.0f
 @property (nonatomic, assign) CGFloat spacingWeChat;
-//当头像为微信头像时候的背景色 默认值为[UIColor colorWithWhite: 239.0f / 255.0f alpha:1]
+///当头像为微信头像时候的背景色          默认值为[UIColor colorWithWhite: 239.0f / 255.0f alpha:1]
 @property (nonatomic, strong) UIColor *avatarBackGroundColorWeChat;
-
+///文字填充属性                       默认值白色，8号字
+@property (nonatomic, strong) NSDictionary *textAttributes;
 /**
  更新颜色规则
 
  @param ahexStringSource 颜色hexString
- @default 默认值为 @[@"#97c5e8", @"#9acbe1", @"#84d1d9", @"#f2b591", @"#e3c097", @"#b9a29a"]
+ @default                           默认值为 @[@"#97c5e8", @"#9acbe1", @"#84d1d9", @"#f2b591", @"#e3c097", @"#b9a29a"]
  
  */
 - (void)updateColorRegular:(NSArray *)ahexStringSource;

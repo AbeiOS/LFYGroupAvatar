@@ -27,6 +27,7 @@ static uint kMaxCountWeChat = 9;
 typedef struct {
     CGFloat startAngle;
     CGFloat endAngle;
+    CGFloat halfAngle;
 } LFYAngle;
 
 typedef NS_ENUM(NSUInteger, LFYWeChatGroupHeaderViewType) {
@@ -47,8 +48,20 @@ typedef NS_ENUM(NSUInteger, LFYQQGroupHeaderViewType) {
     LFYQQGroupHeaderViewTypeFive,
 };
 
-#define kCosRadius(arg) cosf(M_PI * (arg / 180.0f))
-#define kSinRadius(arg) sinf(M_PI * (arg / 180.0f))
+static inline float radians(double degrees) {
+    return M_PI * (degrees / 180.0f);
+}
+
+/**
+ 计算凹槽最低点距离圆心的距离
+
+ @param halfAngle 开口角的一半
+ @param radius 半径
+ @return CGFloat
+ */
+static inline CGFloat distanceForDeepRadius(CGFloat halfAngle, CGFloat radius) {
+    return radius * cos(halfAngle) - radius * sin(halfAngle) * tan(halfAngle);
+}
 
 #define sn(arg) ((arg && ![arg isKindOfClass:[NSNull class]]) ? arg:@"")
 

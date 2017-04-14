@@ -7,7 +7,7 @@
 //
 
 #import "LFYGroupAvatarMaker.h"
-#import "AJColorTool.h"
+#import "LFYColorTool.h"
 
 @interface LFYGroupAvatarMaker ()
 
@@ -19,14 +19,28 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        ///设置一些默认值
         _avatarBackGroundColorQQ = [UIColor whiteColor];
         _avatarBackGroundColorWeChat = [UIColor colorWithWhite: 239.0f / 255.0f alpha:1];
         _distanceFactor = 3.5f / 80.0f;
         _leadingWeChat = 1.0f;
         _spacingWeChat = 2.0f;
+        _textAttributes = [self builderTextAttributed];
     }
     return self;
 }
+
+- (NSDictionary *)builderTextAttributed {
+    NSMutableParagraphStyle *stype = [[NSMutableParagraphStyle alloc] init];
+    stype.alignment = NSTextAlignmentCenter;
+    
+    return @{
+             NSParagraphStyleAttributeName:stype,
+             NSFontAttributeName:[UIFont systemFontOfSize:8],
+             NSForegroundColorAttributeName:[UIColor colorWithWhite:1 alpha:1]
+             };
+}
+
 /**
  画一个群头像
  
@@ -132,7 +146,7 @@
             
             break;
     }
-    
+    smallcircleR -= .5;
     ///3、计算整个头像的中心点坐标
     CGFloat estimateW = 0;
     CGFloat estimateH = 0;
@@ -147,7 +161,7 @@
             break;
         case LFYQQGroupHeaderViewTypeFive: {
             estimateW = aSize.width;
-            estimateH = estimateW * (3 * smallcircleR + _distance + kCosRadius(36) * R) / (2 * smallcircleR + 2 * kSinRadius(72) * R);
+            estimateH = estimateW * (3 * smallcircleR + _distance + cos(radians(36)) * R) / (2 * smallcircleR + 2 * sin(radians(72)) * R);
             centerY = R + smallcircleR + (estimateW - estimateH) / 2.0f;
         }
             break;
@@ -218,35 +232,94 @@
                    radius:(CGFloat)radius
            maxAvatarCount:(NSInteger)maxAvatarCount
              currentIndex:(NSInteger)currentIndex {
+    ///1、先计算偏移角以及开口角的大小，单位为弧度即例入 1/3 * M_PI
     LFYAngle angle = [self caculateAngleFromMaxCount:maxAvatarCount currentIndex:currentIndex radius:radius];
     
-    CGSize imageSize = CGSizeMake(radius * 2, radius * 2);
+    ///2、分别计算最低点和起始点的坐标，用以画圆
+    CGFloat x1 = avatarCenter.x + distanceForDeepRadius(angle.halfAngle, radius) * cos(angle.startAngle + angle.halfAngle);
+    CGFloat y1 = avatarCenter.y + distanceForDeepRadius(angle.halfAngle, radius) * sin(angle.startAngle + angle.halfAngle);
     
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, [UIScreen mainScreen].scale);
+    CGFloat x2 = avatarCenter.x + radius * cos(angle.startAngle);
+    CGFloat y2 = avatarCenter.y + radius * sin(angle.startAngle);
     
+    ///3、开始画圆（画圆之前要开始保存现有上下文状态）
     CGContextRef ctx = UIGraphicsGetCurrentContext();
+    // !!!: CGContextSaveGState和CGContextRestoreGState是成对出现的，缺少了会崩溃
+    CGContextSaveGState(ctx);
     
-    ///圆心
-    CGFloat centerX = radius;
-    CGFloat centerY = radius;
-    CGPoint center = CGPointMake(centerX, centerY);
+    CGContextAddArc(ctx, avatarCenter.x, avatarCenter.y, radius, angle.startAngle, angle.endAngle, 1);
+    CGContextAddArcToPoint(ctx, x1, y1, x2, y2, radius);
     
-    UIBezierPath *bezierPath = [self makeupBezierPathRadius:radius angle:angle ctx:ctx center:center];
-    
-    CGContextAddPath(ctx, bezierPath.CGPath);
     CGContextClosePath(ctx);
-    ///将ctx内容裁剪。在以后的绘画中，都会按照既有的ctx路径去裁剪。
     CGContextClip(ctx);
-    [avatar drawInRect:CGRectMake(0, 0, radius * 2, radius * 2)];
     
-    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
+    ///4、画好圆后，画图
     CGRect avatarRect = CGRectMake(avatarCenter.x - radius, avatarCenter.y - radius, radius * 2, radius * 2);
+    [avatar drawInRect:avatarRect];
     
-    [resultImage drawInRect:avatarRect];
+    ///5、然后保存当前画图状态。
+    CGContextRestoreGState(ctx);
 }
+
+/**
+ 通过计算好的中心点，去画文字
+ 
+ @param avatar          NSString *
+ @param avatarCenter    计算好的中心点
+ @param radius          小头像的半径
+ @param currentIndex    要画的第几个小头像
+ */
+- (void)makeupQQStrAvatar:(id)avatar
+             avatarCenter:(CGPoint)avatarCenter
+                   radius:(CGFloat)radius
+           maxAvatarCount:(NSInteger)maxAvatarCount
+             currentIndex:(int)currentIndex {
+    ///1、计算开角大小和方向
+    LFYAngle angle = [self caculateAngleFromMaxCount:maxAvatarCount
+                                        currentIndex:currentIndex
+                                              radius:radius];
+    /*-------------------这里是画控制点的代码（已废弃，可体验）-------------------*/
+    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //    UIBezierPath *bezierPath = [self makeupBezierPathRadius:radius angle:angle ctx:ctx center:avatarCenter];
+    //
+    //    CGContextAddPath(ctx, bezierPath.CGPath);
+    //    CGContextClosePath(ctx);
+    //
+    //    CGContextSetFillColorWithColor(ctx, [[LFYColorTool sharedInstance] colorAJWithString:avatar].CGColor);
+    //    CGContextFillPath(ctx);
+    
+    /*-------------------这里是优化后的代码-------------------*/
+    ///2、计算圆弧低点和起始点的坐标，用以画圆。
+    CGFloat x1 = avatarCenter.x + distanceForDeepRadius(angle.halfAngle, radius) * cos(angle.startAngle + angle.halfAngle);
+    CGFloat y1 = avatarCenter.y + distanceForDeepRadius(angle.halfAngle, radius) * sin(angle.startAngle + angle.halfAngle);
+    
+    CGFloat x2 = avatarCenter.x + radius * cos(angle.startAngle);
+    CGFloat y2 = avatarCenter.y + radius * sin(angle.startAngle);
+    
+    ///3、开始画圆
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    // !!!: CGContextSaveGState和CGContextRestoreGState是成对出现的，缺少了会崩溃
+    CGContextSaveGState(ctx);
+    
+    CGContextAddArc(ctx, avatarCenter.x, avatarCenter.y, radius, angle.startAngle, angle.endAngle, 1);
+    CGContextAddArcToPoint(ctx, x1, y1, x2, y2, radius);
+    
+    ///4、在这个部分填充颜色以及设置stroke的颜色大小等等属性
+    [[[LFYColorTool sharedInstance] lfy_colorAJWithString:avatar] setFill];
+    CGContextDrawPath(ctx, kCGPathEOFill);
+    
+    CGContextClosePath(ctx);
+    CGContextClip(ctx);
+    
+    CGContextRestoreGState(ctx);
+    
+    ///5、画好圆后画文字。
+    NSString *avatarStr = [avatar substringToIndex:1];
+    CGSize attriSize = [avatarStr sizeWithAttributes:self.textAttributes];
+    
+    [avatarStr drawInRect:CGRectMake(avatarCenter.x - attriSize.width / 2.0f, avatarCenter.y - attriSize.height / 2.0f, attriSize.width, attriSize.height) withAttributes:self.textAttributes];
+}
+
 /**
  计算路径
  
@@ -256,7 +329,8 @@
  @param center 小圆的中心点
  @return 返回要画的路径
  */
-- (UIBezierPath *)makeupBezierPathRadius:(CGFloat)radius angle:(LFYAngle)angle ctx:(CGContextRef)ctx center:(CGPoint)center {
+- (UIBezierPath *)makeupBezierPathRadius:(CGFloat)radius angle:(LFYAngle)angle ctx:(CGContextRef)ctx center:(CGPoint)center __deprecated_msg("v1.0.1后被废弃"){
+    
     CGFloat startAngle = angle.startAngle;
     CGFloat endAngle = angle.endAngle;
     
@@ -265,23 +339,23 @@
     [bezierPath moveToPoint:center];
     [bezierPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:NO];
     
-    CGFloat startY = center.y + radius * sinf(startAngle);
     CGFloat startX = center.x + radius * cosf(startAngle);
-    
-    CGFloat endY = center.y + radius * sinf(endAngle);
+    CGFloat startY = center.y + radius * sinf(startAngle);
+
     CGFloat endX = center.x + radius * cosf(endAngle);
-    
+    CGFloat endY = center.y + radius * sinf(endAngle);
+
     ///计算起始点和终点中间点的位置
     CGFloat middleX = (startX + endX) / 2.0f;
     CGFloat middleY = (startY + endY) / 2.0f;
     
-    ///1、先计算外部控制点的x轴坐标
+    ///先计算外部控制点的x轴坐标
     CGFloat otherWidth = radius / cosf((endAngle - startAngle) / 2.0f);
     
     CGFloat otherX = center.x + otherWidth * cosf(startAngle + (endAngle - startAngle) / 2.0f);
     CGFloat otherY = center.y + otherWidth * sinf(startAngle + (endAngle - startAngle) / 2.0f);
     
-    ///计算控制点的位置。
+    ///计算控制点的位置
     CGPoint controlCenter = CGPointMake(middleX - (otherX - middleX), middleY - (otherY - middleY));
     
     [bezierPath moveToPoint:CGPointMake(startX, startY)];
@@ -303,12 +377,13 @@
     LFYAngle angle;
     angle.startAngle = 0;
     angle.endAngle = 0;
-    
+    angle.halfAngle = 0;
     switch (maxCount) {
         case LFYQQGroupHeaderViewTypeTwo: {
             switch (currentIndex) {
                 case 0: {
                     CGFloat angleOffSet = .35 * M_PI;
+                    angle.halfAngle = angleOffSet / 2.0f;
                     
                     angle.startAngle = 2 * M_PI + 1 / 4.0f * M_PI - angleOffSet / 2.0f;
                     angle.endAngle = angle.startAngle + angleOffSet;
@@ -316,7 +391,8 @@
                     break;
                 case 1: {
                     CGFloat angleOffSet = - 2 * M_PI;
-                    
+                    angle.halfAngle = angleOffSet / 2.0f;
+
                     angle.startAngle = 0 * M_PI;
                     angle.endAngle = angle.startAngle + angleOffSet;
                 }
@@ -327,8 +403,9 @@
             
             break;
         case LFYQQGroupHeaderViewTypeThree: {
-            CGFloat x = acosf(kSinRadius(60) * (radius) / radius);
-            
+            CGFloat x = acosf(sin(radians(60)) * (radius) / radius);
+            angle.halfAngle = x;
+
             ///五边形的开角由distance决定 distance 越小，开角越大，最大不超过180度。
             CGFloat angleOffSet = 2 * x;
             
@@ -359,8 +436,11 @@
             
             break;
         case LFYQQGroupHeaderViewTypeFour: {
-            CGFloat angleOffSet = .4 * M_PI;
+            CGFloat x = acos(sin(radians(45)) * (radius + _distance) / radius);
             
+            CGFloat angleOffSet = 2 * x;
+            angle.halfAngle = angleOffSet / 2.0f;
+
             switch (currentIndex) {
                 case 1: {
                     angle.startAngle = .5f * M_PI + - angleOffSet / 2.0f;
@@ -394,8 +474,9 @@
             
             break;
         case LFYQQGroupHeaderViewTypeFive: {
-            CGFloat x = acosf(kSinRadius(36) * (radius + _distance) / radius);
-            
+            CGFloat x = acosf(sin(radians(36)) * (radius + _distance) / radius);
+            angle.halfAngle = x;
+
             ///五边形的开角由distance决定 distance 越小，开角越大，最大不超过180度。
             CGFloat angleOffSet = 2 * x;
             switch (currentIndex) {
@@ -447,53 +528,6 @@
 }
 
 /**
- 通过计算好的中心点，去画文字
- 
- @param avatar          NSString *
- @param avatarCenter    计算好的中心点
- @param radius          小头像的半径
- @param currentIndex    要画的第几个小头像
- */
-- (void)makeupQQStrAvatar:(id)avatar
-             avatarCenter:(CGPoint)avatarCenter
-                   radius:(CGFloat)radius
-           maxAvatarCount:(NSInteger)maxAvatarCount
-             currentIndex:(int)currentIndex {
-    LFYAngle angle = [self caculateAngleFromMaxCount:maxAvatarCount
-                                        currentIndex:currentIndex
-                                              radius:radius];
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    UIBezierPath *bezierPath = [self makeupBezierPathRadius:radius angle:angle ctx:ctx center:avatarCenter];
-    
-    CGContextAddPath(ctx, bezierPath.CGPath);
-    CGContextClosePath(ctx);
-    
-   
-    
-    CGContextSetFillColorWithColor(ctx, [[AJColorTool sharedInstance] colorAJWithString:avatar].CGColor);
-    CGContextFillPath(ctx);
-    
-    NSString *avatarStr = [avatar substringToIndex:1];
-    CGSize attriSize = [avatarStr sizeWithAttributes:[self attri]];
-    
-    [avatarStr drawInRect:CGRectMake(avatarCenter.x - attriSize.width / 2.0f, avatarCenter.y - attriSize.height / 2.0f, attriSize.width, attriSize.height) withAttributes:[self attri]];
-}
-
-/**
- 没什么用
- 
- @return 只是为了方便画文字
- */
-- (NSDictionary *)attri {
-    NSMutableParagraphStyle *stype = [[NSMutableParagraphStyle alloc] init];
-    stype.alignment = NSTextAlignmentCenter;
-    return @{NSParagraphStyleAttributeName:stype,
-             NSForegroundColorAttributeName:[UIColor colorWithWhite:1 alpha:1],
-             };
-};
-
-/**
  返回每个小头像的直径
  
  @param num 一共几个头像
@@ -516,7 +550,7 @@
             break;
             
         case 5:
-            return (avatarWidth - 2 * kSinRadius(72) * _distance) / (2 + 2 * kSinRadius(72));
+            return (avatarWidth - 2 * sin(radians(72)) * _distance) / (2 + 2 * sin(radians(72)));
             
             break;
             
@@ -555,17 +589,17 @@
             CGContextAddPath(ctx, path);
             
             ///填充颜色
-            [[[AJColorTool sharedInstance] colorAJWithString:avatar] setFill];
+            [[[LFYColorTool sharedInstance] lfy_colorAJWithString:avatar] setFill];
             CGContextDrawPath(ctx, kCGPathFill);
             ///释放路径
             CGPathRelease(path);
             
             NSString *avatarStr = [avatar substringToIndex:1];
-            CGSize attriSize = [avatarStr sizeWithAttributes:[self attri]];
+            CGSize attriSize = [avatarStr sizeWithAttributes:self.textAttributes];
             
             CGRect rsRect = CGRectMake(avatarRect.origin.x + (avatarRect.size.width - attriSize.width) / 2.0f , avatarRect.origin.y + (avatarRect.size.height - attriSize.height) / 2.0f , attriSize.width, attriSize.height);
             
-            [avatarStr drawInRect:rsRect withAttributes:[self attri]];
+            [avatarStr drawInRect:rsRect withAttributes:self.textAttributes];
         }
     }
 }
@@ -687,7 +721,7 @@
 }
 
 - (void)updateColorRegular:(NSArray *)ahexStringSource {
-    [AJColorTool sharedInstance].hexStringSource = ahexStringSource;
+    [LFYColorTool sharedInstance].hexStringSource = ahexStringSource;
 }
 
 @end
