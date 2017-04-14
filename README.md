@@ -32,7 +32,7 @@ LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
 ### 示例图
 
-![image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/%E9%A6%96%E9%A1%B5%E6%88%AA%E5%9B%BE.png)
+![image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/首页截图.jpg)
 
 ### 联系我
 
