@@ -19,7 +19,7 @@ maker.avatarBackGroundColorQQ = [UIColor redColor];
 maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
 [maker updateColorRegular:@[@"#333333", @"#555555",...]];
 
-![Image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/首页截图.jpg)
+![image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/首页截图.jpg)
 ```
 ### Support or Contact
 
