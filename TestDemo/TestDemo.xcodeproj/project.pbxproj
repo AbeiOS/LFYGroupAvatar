@@ -15,8 +15,8 @@
 		9E5D3BDF1E9CBB9F003DBF83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D3BDD1E9CBB9F003DBF83 /* LaunchScreen.storyboard */; };
 		9E5D3BEA1E9CBB9F003DBF83 /* TestDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3BE91E9CBB9F003DBF83 /* TestDemoTests.m */; };
 		9E5D3BF51E9CBB9F003DBF83 /* TestDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3BF41E9CBB9F003DBF83 /* TestDemoUITests.m */; };
-		9E5D3C081E9CBBBD003DBF83 /* AJColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3C041E9CBBBD003DBF83 /* AJColorTool.m */; };
 		9E5D3C091E9CBBBD003DBF83 /* LFYGroupAvatarMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D3C071E9CBBBD003DBF83 /* LFYGroupAvatarMaker.m */; };
+		9EBA65751EA0B3F100282247 /* LFYColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA65741EA0B3F100282247 /* LFYColorTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +53,11 @@
 		9E5D3BF01E9CBB9F003DBF83 /* TestDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E5D3BF41E9CBB9F003DBF83 /* TestDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestDemoUITests.m; sourceTree = "<group>"; };
 		9E5D3BF61E9CBB9F003DBF83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9E5D3C031E9CBBBD003DBF83 /* AJColorTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJColorTool.h; sourceTree = "<group>"; };
-		9E5D3C041E9CBBBD003DBF83 /* AJColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJColorTool.m; sourceTree = "<group>"; };
 		9E5D3C051E9CBBBD003DBF83 /* LFYGroupAvatarDfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFYGroupAvatarDfs.h; sourceTree = "<group>"; };
 		9E5D3C061E9CBBBD003DBF83 /* LFYGroupAvatarMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFYGroupAvatarMaker.h; sourceTree = "<group>"; };
 		9E5D3C071E9CBBBD003DBF83 /* LFYGroupAvatarMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFYGroupAvatarMaker.m; sourceTree = "<group>"; };
+		9EBA65731EA0B3F100282247 /* LFYColorTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFYColorTool.h; sourceTree = "<group>"; };
+		9EBA65741EA0B3F100282247 /* LFYColorTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFYColorTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,9 +151,9 @@
 		9E5D3C021E9CBBBD003DBF83 /* LFYGroupAvatar */ = {
 			isa = PBXGroup;
 			children = (
-				9E5D3C031E9CBBBD003DBF83 /* AJColorTool.h */,
-				9E5D3C041E9CBBBD003DBF83 /* AJColorTool.m */,
 				9E5D3C051E9CBBBD003DBF83 /* LFYGroupAvatarDfs.h */,
+				9EBA65731EA0B3F100282247 /* LFYColorTool.h */,
+				9EBA65741EA0B3F100282247 /* LFYColorTool.m */,
 				9E5D3C061E9CBBBD003DBF83 /* LFYGroupAvatarMaker.h */,
 				9E5D3C071E9CBBBD003DBF83 /* LFYGroupAvatarMaker.m */,
 			);
@@ -297,10 +297,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5D3C091E9CBBBD003DBF83 /* LFYGroupAvatarMaker.m in Sources */,
-				9E5D3C081E9CBBBD003DBF83 /* AJColorTool.m in Sources */,
 				9E5D3BD71E9CBB9F003DBF83 /* ViewController.m in Sources */,
 				9E5D3BD41E9CBB9F003DBF83 /* AppDelegate.m in Sources */,
 				9E5D3BD11E9CBB9F003DBF83 /* main.m in Sources */,
+				9EBA65751EA0B3F100282247 /* LFYColorTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +536,7 @@
 				9E5D3BFB1E9CBB9F003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E5D3BFC1E9CBB9F003DBF83 /* Build configuration list for PBXNativeTarget "TestDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +545,7 @@
 				9E5D3BFE1E9CBB9F003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E5D3BFF1E9CBB9F003DBF83 /* Build configuration list for PBXNativeTarget "TestDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +554,7 @@
 				9E5D3C011E9CBB9F003DBF83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
