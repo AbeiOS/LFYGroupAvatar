@@ -23,6 +23,11 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
+使用以下方法制作图片
+- (UIImage *)makeGroupHeader:(LFYGroupAvatarModel)aModel
+                  headerSize:(CGSize)aSize
+                  dataSource:(NSArray *)aDatasource;
+                  
 [Link](url) and ![Image](src)
 ```
 
