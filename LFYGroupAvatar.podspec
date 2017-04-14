@@ -29,7 +29,7 @@ This is an avatar of a chat group which is similar to the one in QQ and WeChat.
                    DESC
 
   s.homepage     = "https://github.com/AbeiOS/LFYGroupAvatar"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  #s.screenshots  = "https://github.com/AbeiOS/LFYGroupAvata"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
