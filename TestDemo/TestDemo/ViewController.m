@@ -57,7 +57,7 @@
 }
 
 - (NSArray *)dataSource {
-    NSArray *resource = @[@"张l", @"你好", @"李d", @"张四", @"再见", @"赵于成", @"李d", @"good", @"hello"] ;
+    NSArray *resource = @[@"张l", [UIImage imageNamed:@"2"], @"李d", @"张四", @"再见", @"赵于成", @"李d", @"good", @"hello"] ;
     
     return resource;
 }
