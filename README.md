@@ -1,12 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to AbeiOS GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/AbeiOS/LFYGroupAvatar/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### LFYGroupAvatar
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
 ```markdown
 Syntax highlighted code block
@@ -23,16 +19,18 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-使用以下方法制作图片
+使用以下方法制作QQ或者微信头像
 - (UIImage *)makeGroupHeader:(LFYGroupAvatarModel)aModel
                   headerSize:(CGSize)aSize
-                  dataSource:(NSArray *)aDatasource;
-                  
-[Link](url) and ![Image](src)
+                  dataSource:(NSArray *)aDatasource;
+更新maker的属性，修改布局
+maker.distanceFactor = 3.5 / 80;
+maker.avatarBackGroundColorQQ = [UIColor redColor];
+maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
+[maker updateColorRegular:@[@"#333333", @"#555555",...]];
+
+![Image](src)
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
 ### Jekyll Themes
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AbeiOS/LFYGroupAvatar/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
