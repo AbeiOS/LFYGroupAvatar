@@ -19,9 +19,10 @@ maker.avatarBackGroundColorQQ = [UIColor redColor];
 maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
 [maker updateColorRegular:@[@"#333333", @"#555555",...]];
 
+###
+
 ![image](https://github.com/HuTianQi/QQ/blob/master/QQ_Screenshot/%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85%E7%95%8C%E9%9D%A2.jpg)
 
-```
 ### Support or Contact
 
 QQ:2805508788
