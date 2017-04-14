@@ -4,7 +4,7 @@
 
 LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
-*** 使用以下方法制作QQ或者微信头像
+### 使用以下方法制作QQ或者微信头像
 ```markdown
 - (UIImage *)makeGroupHeader:(LFYGroupAvatarModel)aModel
                   headerSize:(CGSize)aSize
