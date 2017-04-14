@@ -4,25 +4,36 @@
 
 LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
+*** 使用以下方法制作QQ或者微信头像
 ```markdown
-Syntax highlighted code block
-
-**Bold** and _Italic_ and `Code` text
-
-使用以下方法制作QQ或者微信头像
 - (UIImage *)makeGroupHeader:(LFYGroupAvatarModel)aModel
                   headerSize:(CGSize)aSize
                   dataSource:(NSArray *)aDatasource;
-更新maker的属性，修改布局
-maker.distanceFactor = 3.5 / 80;
-maker.avatarBackGroundColorQQ = [UIColor redColor];
-maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
-[maker updateColorRegular:@[@"#333333", @"#555555",...]];
+```
+调整以下属性，修改布局
 
-###
 
-![image](https://github.com/HuTianQi/QQ/blob/master/QQ_Screenshot/%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85%E7%95%8C%E9%9D%A2.jpg)
+1、调整中心点距小头像的距离
+```
+  maker.distanceFactor = 3.5 / 80;
+```
+2、调整QQ头像的背景颜色
+```
+  maker.avatarBackGroundColorQQ = [UIColor redColor];
+```
+3、调整头像中间的文字颜色
+```
+  maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
+```
+4、调整根据文字更换颜色的规则
+```
+  [maker updateColorRegular:@[@"#333333", @"#555555",...]];
+```
 
-### Support or Contact
+### 示例图
+
+![image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/%E9%A6%96%E9%A1%B5%E6%88%AA%E5%9B%BE.png)
+
+### 联系我
 
 QQ:2805508788
