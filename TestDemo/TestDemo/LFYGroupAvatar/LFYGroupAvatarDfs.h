@@ -63,6 +63,9 @@ static inline CGFloat distanceForDeepRadius(CGFloat halfAngle, CGFloat radius) {
     return radius * cos(halfAngle) - radius * sin(halfAngle) * tan(halfAngle);
 }
 
+
+#ifndef sn
 #define sn(arg) ((arg && ![arg isKindOfClass:[NSNull class]]) ? arg:@"")
+#endif
 
 #endif /* LFYGroupAvatarDfs_h */

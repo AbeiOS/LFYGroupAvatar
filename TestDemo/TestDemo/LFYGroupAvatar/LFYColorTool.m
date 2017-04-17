@@ -60,7 +60,7 @@ static dispatch_once_t _aOnce_t;
         int colorIndex = offset % _hexStringSource.count;
         return [self lfy_colorFromHexString:_hexStringSource[colorIndex]];
     } else {
-        return [self lfy_colorAJWithString:_hexStringSource[26 % _hexStringSource.count]];
+        return [self lfy_colorFromHexString:_hexStringSource[26 % _hexStringSource.count]];
     }
 }
 
