@@ -34,6 +34,59 @@ LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
 ![image](https://github.com/AbeiOS/LFYGroupAvatar/blob/master/ScreenShot/首页截图.jpg)
 
+### 注意事项！！！
+1、是否可以画网络图片？
+答：可以。使用 group 线程。先将图片下载好再合成，示例代码如下：
+```
+- (void)lfy_makeGroupAvatar:(void (^)(UIImage *))avatarCompetion {
+    __block NSMutableArray *imageArray = @[].mutableCopy;
+    
+    dispatch_group_t group_t = dispatch_group_create();
+    dispatch_queue_t groupAvatarQ = dispatch_queue_create("hrm.group.avatar", DISPATCH_QUEUE_SERIAL);
+    
+    dispatch_group_enter(group_t);
+/   下载图片部分
+/    for (MultiSelectItem *item in self.selectedItems) {
+/        [[SDWebImageManager sharedManager] downloadImageWithURL:item.imageURL options:SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+/    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+/            if (image) {
+/                [imageArray addObject:image];
+/            } else {
+/                [imageArray addObject:sn(item.name)];
+/            }
+/        }]; 
+/    }
+    dispatch_group_leave(group_t);
+    
+    dispatch_group_notify(group_t, groupAvatarQ, ^{
+        UIImage *grouImage = [self combinePersonAvatar:imageArray];
+        !avatarCompetion ?: avatarCompetion(grouImage);
+    });
+}
+
+- (UIImage *)combinePersonAvatar:(NSArray *)avatarArr {
+    ///制作头像
+    LFYGroupAvatarMaker *maker = [LFYGroupAvatarMaker new];
+    maker.avatarBackGroundColorQQ = [UIColor clearColor];
+    UIImage *uploadImage = [maker makeGroupHeader:LFYGroupAvatarModelQQ headerSize:CGSizeMake(50, 50) dataSource:avatarArr];
+    
+    return uploadImage;
+}
+
+```
+
+
+
+2、单个图片怎么处理。
+答：单个图片请在自己的业务逻辑内判断
+
+
+
+3、上传的透明背景的图片颜色为什么不是透明的？
+答：上传图片到服务器时，请使用 UIImagePNGRepresentation(<##>) 方法。因为 UIImageJPEGRepresentation(<##>, <##>) 系统方法会将透明图片压缩成非透明图片。
+
+
 ### 联系我
 
 QQ:2805508788
