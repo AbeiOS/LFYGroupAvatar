@@ -89,4 +89,4 @@ LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 
 ### 联系我
 
-QQ:2805508788
+WeChat:ftd99856118
