@@ -23,11 +23,11 @@ LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 ```
 3、调整头像中间的文字颜色
 ```
-  maker.textAttributes = @{NSForegroundColorAttributeName:[UIFont systemFontOfSize:2]};;
+  maker.textAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};;
 ```
 4、调整根据文字更换颜色的规则
 ```
-  [maker updateColorRegular:@[@"#333333", @"#555555",...]];
+  [maker updateColorRegular:@[@"#333333", @"#555555", ...]];
 ```
 
 ### 示例图
