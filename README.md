@@ -86,7 +86,3 @@ LFYGroupAvatar是用来画QQ或者微信头像的帮助类
 3、上传的透明背景的图片颜色为什么不是透明的？
 答：上传图片到服务器时，请使用 UIImagePNGRepresentation(<##>) 方法。因为 UIImageJPEGRepresentation(<##>, <##>) 系统方法会将透明图片压缩成非透明图片。
 
-
-### 联系我
-
-WeChat:ftd99856118
