@@ -1,3 +1,4 @@
+[![Pod version](https://badge.fury.io/co/LFYGroupAvatar.svg)](https://badge.fury.io/co/LFYGroupAvatar)
 ## Welcome to AbeiOS GitHub Pages
 
 ### LFYGroupAvatar
