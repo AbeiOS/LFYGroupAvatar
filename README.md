@@ -1,4 +1,6 @@
 [![Pod version](https://badge.fury.io/co/LFYGroupAvatar.svg)](https://badge.fury.io/co/LFYGroupAvatar)
+![CocoaPods](https://img.shields.io/cocoapods/dt/LFYGroupAvatar.svg)
+
 ## Welcome to AbeiOS GitHub Pages
 
 ### LFYGroupAvatar
